@@ -2,6 +2,7 @@
 /uploads
 
 package-lock.json
+*.txt
 
 # Logs
 logs
