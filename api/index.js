@@ -24,7 +24,7 @@ const queueStatus = {
 let queue = [];
 
 const diskStorage = multer.diskStorage({
-  destination: "./uploads/",
+  destination: process.env.UPLOADS_DIR || "./uploads/",
   filename: (req, file, cb) => {
     //TODO could check file type and error if not jpg, png, etc
     return cb(null, Date.now() + path.extname(file.originalname))
@@ -65,7 +65,7 @@ app.get('/api/image/:imageName', async (req, res) => {
 })
 
 app.post('/api/image/:fileName',(req, res) => {
-  const fileName = "./uploads/" + req.params.fileName;
+  const fileName = (process.env.UPLOADS_DIR || "./uploads/") + req.params.fileName;
 
   //check to see if image is uploaded in directory
   access(fileName, constants.F_OK, (err) => {
@@ -311,7 +311,7 @@ async function startImageProcessing(imageName, imagePromptType) {
     console.log(`starting image process for2: ${imageName} prompt: ${imagePromptType} `);
         
     try{
-      let image_path = `./uploads/${imageName}`;
+      let image_path = (process.env.UPLOADS_DIR || "./uploads/") + `${imageName}`;
       let image_url = undefined;
       let additional_info = '';
       let prompt_type = imagePromptType;
