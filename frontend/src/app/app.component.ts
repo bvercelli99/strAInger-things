@@ -76,6 +76,9 @@ export class AppComponent implements OnInit {
   onProcessClick() {
     const promptType = this.selInput?.nativeElement.value as number;
     if (this.srcImage) {
+      this.aiImage = null;
+      this.aiLoadingQuip = null;
+
 
       this.imgService.addImageToQueue(this.srcImage.imageId, promptType).pipe(take(1)).subscribe({
         next: (placeInLine: { placeInLine: number }) => {
@@ -115,7 +118,7 @@ export class AppComponent implements OnInit {
   getQuip(): string {
     if (this.aiLoadingQuip != null && this.aiImage != null) {
       if (this.aiImage.placeInLine == 0) {
-        return "You're request is processing now hang tight!"
+        return "Your request is processing now, hang tight!"
       }
       else {
         return this.quips[this.aiLoadingQuip].replace("there are XXX requests in front of you.",
