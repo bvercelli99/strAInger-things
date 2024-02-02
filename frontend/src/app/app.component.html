@@ -1,0 +1,72 @@
+<style>
+  
+
+  @media screen and (max-width: 650px) {
+    
+  }
+</style>
+
+<div class="main abs-fill-0">
+  <div class="parent">
+    <div class="logo-container"></div>
+    <div class="txt-ctr info-container">
+      <div><h3>Choose your destination</h3></div>
+      <div>
+        <select #sel class="sel-dest">
+          <option *ngFor="let d of destinations" [value]="d.value">{{ d.name }}</option>
+        </select>
+      </div>
+    </div>
+    <div class="image-row">
+      <div class="img-left" [ngStyle]="{'background-color': srcImage != null ? 'black' : null}">
+        <div class="user-img" *ngIf="srcImage != null" 
+          [ngStyle]="{'background-image': 'url(' + srcImage.src + ')'}"
+        >
+          <button *ngIf="!srcLoading && null != srcImage" title="Remove" class="dl-btn" (click)="onClearSourceClick()">
+            <span>X</span>
+          </button>
+        </div>
+
+        <div *ngIf="srcImage == null" class="drag-container" appDnd (fileDropped)="onFileDropped($event)">
+          <input type="file" #fileDropRef id="fileDropRef" accept="image/bmp, image/jpeg, image/x-png, image/png" (change)="fileBrowseHandler($event)" />
+          <img height="32px" width="32px" src="../assets/upload.svg">
+        
+          <h3>Drag and drop image</h3>
+          <h3>or</h3>
+          <label for="fileDropRef">Browse for file</label>
+        </div>
+
+      </div>
+      <div class="img-right">
+        <div class="loading-container" *ngIf="aiImage?.status === 1 || aiImage?.status === 2">
+          <div class="full-row"></div>
+          <div class="mid-row">
+            <div class="loader">
+              <app-loading-spinner></app-loading-spinner>
+            </div>
+          </div>
+          <div class="quip-msg"><span>{{ getQuip() }}</span></div>          
+        </div>
+        <div *ngIf="aiImage?.status === 3" class="user-img" [ngStyle]="{'background-image': 'url(' + aiImage?.url + ')'}">
+          <button title="Download" class="dl-btn" (click)="onDownloadImageClick()">
+            <img height="24px" width="24px" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAABDElEQVR4nO2VWwrCMBBFZxW1uP+NaL9E8AHiYzVHIimG0ndCM9U5IAqa65ze0YoY4wB2wFHWDh5ZO5iIMqwRbVgj2rBGtGGNaMMa0YaKRhhPNZTR83419ktkAZH9KkQkAhUZaBhCTETZ1RRrRNnVFGvkTxsBTsAFKKdmuDPAFTjEzpFCxA3ieLTJdGV4CXfGcY6dI4VIAdz8R1/AdigD2ARnns0z2e7sfTLNjKkSi4r0yYQZcyQWF+mSqTPmSmQRafkR18/h69Y/hdRzJAloNBMyqYnsIh0ysySyiwRrdvePMtccEh3wbaaIzPiQLyARxM5hIonBGvHYaiUGWy2PrVZisNX61dXSgvyDyBs7XNBL9qLRXQAAAABJRU5ErkJggg==">
+          </button>
+        </div>
+        <div class="error-container" *ngIf="aiImage?.status === 4">
+          <span>{{ getErrorMessage(aiImage ? aiImage.errorCode: -1) }}</span>
+        </div>
+        
+      </div>
+    </div>
+    <div class="txt-ctr status-container"></div>
+    <div class="btn-container txt-ctr">
+      <button [disabled]="!canSubmit()" [ngClass]="!canSubmit() ? 'process-btn btn-disabled' : 'process-btn' " 
+        class="process-btn" (click)="onProcessClick()">
+        Process
+      </button>
+    </div>
+  </div>
+
+</div>
+
+<router-outlet />

@@ -129,7 +129,7 @@ dist
 .vscode-test
 
 # Visual Studio Code
-/.vscode/*
+/frontend/.vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
@@ -144,7 +144,7 @@ dist
 .pnp.*
 
 #angular misc
-/.angular/cache
+/frontend/.angular/cache
 .sass-cache/
 /connect.lock
 /coverage
