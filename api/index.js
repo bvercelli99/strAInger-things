@@ -41,13 +41,22 @@ app.use(express.urlencoded({ extended: true }));
 
 
 
-app.get('/:imageName', async (req, res) => {
-  const item = queue.find(f => f.imageName == req.params.imageName);
-  if(item){
+app.get('/api/image/:imageName', async (req, res) => {
+  const itemIdx = queue.findIndex(f => f.imageName == req.params.imageName);
+  if(-1 != itemIdx){
+    let placeInLine = 0;
+    queue.forEach((v, idx) => {
+      if((v.status === queueStatus.WAITING || v.status === queueStatus.PROCESSING) && idx < itemIdx){
+        placeInLine++;
+      }
+    })
+
     res.send({
-      imageName: item.imageName,
-      status: item.status,
-      url: item.url
+      imageName: queue[itemIdx].imageName,
+      status: queue[itemIdx].status,
+      url: queue[itemIdx].url,
+      placeInLine: placeInLine,
+      errorCode: queue[itemIdx].errorCode
     });
   } 
   else{
@@ -55,7 +64,7 @@ app.get('/:imageName', async (req, res) => {
   }
 })
 
-app.post('/image/:fileName',(req, res) => {
+app.post('/api/image/:fileName',(req, res) => {
   const fileName = "./uploads/" + req.params.fileName;
 
   //check to see if image is uploaded in directory
@@ -67,7 +76,7 @@ app.post('/image/:fileName',(req, res) => {
       
       main();
       
-      res.send('image processing now: ' + req.params.fileName + " prompt type: " + parseInt(req.body.imageType) + " ~ there are " + placeInLine + " images in line before yours");
+      res.send({placeInLine: placeInLine});
     }
     else{
       res.status(400).send("Image Not Found");
@@ -75,7 +84,7 @@ app.post('/image/:fileName',(req, res) => {
   });
 });
 
-app.post('/upload', upload.single('files'), uploadFile);
+app.post('/api/upload', upload.single('files'), uploadFile);
 
 function uploadFile(req, res) {
   console.log(req.file.filename);
@@ -137,10 +146,13 @@ function main() {
 
             main(); //call again to get next inline
           }).catch((error) => {
-            console.log('error - startImageProcessing', error);
+            console.log('error - in main startImageProcessing', error);
+            console.log('STATUS: ' + error.status);
             nextInLine.url = "";
             nextInLine.status = queueStatus.ERRORED;
+            nextInLine.errorCode = error.status;
             nextInLine.lastUpdate = new Date();
+            main(); //call again to get next inline
           });          
         }
       }
@@ -148,6 +160,7 @@ function main() {
         if((currentProcessing.lastUpdate.getTime() - new Date().getTime()) > (5*60*1000)){
           console.log('processing longer than 5 minutes, clear image and move on to next');
           currentProcessing.status = queueStatus.ERRORED;
+          currentProcessing.errorCode = 503;
           currentProcessing.lastUpdate = new Date();
           main(); //call again to get next inline
         }
@@ -340,7 +353,8 @@ function addToQueue (imageName = "", promptRequestType) {
     status: queueStatus.WAITING,
     promptRequestType: promptRequestType,
     lastUpdate: new Date(),
-    url: ""
+    url: "",
+    errorCode: null
   });
   console.log('addToQueue', queue);
 }
