@@ -58,7 +58,7 @@ export class AppComponent implements OnInit {
   }
 
   canSubmit(): boolean {
-    if (this.srcImage != null && !this.srcLoading && !this.aiLoadingQuip) {
+    if (this.srcImage != null && !this.srcLoading && null == this.aiLoadingQuip) {
       return true;
     }
     return false;
