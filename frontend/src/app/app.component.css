@@ -3,7 +3,7 @@
     font-size: 1rem;
     color:white;
     min-height:800px;
-    min-width: 1024px;
+    min-width: 900px;
 }
 
 .abs-fill-0{
@@ -18,10 +18,10 @@
 .parent {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
-    grid-template-rows: 200px 80px 400px 30px 50px;
+    grid-template-rows: 200px 80px 400px 10px 50px;
     grid-column-gap: 0px;
     grid-row-gap: 10px;
-    width: 1024px;
+    width: 850px;
     margin: 0 auto;
 }
 
@@ -48,7 +48,7 @@
 .image-row{
     display:grid;
     grid-column: 1 / span 12;
-    grid-template-columns: 400px 224px 400px;
+    grid-template-columns: 400px 50px 400px;
     grid-template-rows: 400px;
     grid-column-gap: 0px;
     grid-row-gap: 0px;

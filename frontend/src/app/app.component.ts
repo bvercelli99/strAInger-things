@@ -25,7 +25,7 @@ export class AppComponent implements OnInit {
   readonly destinations = [
     { name: "Upside Down", value: 1 },
     { name: "Starcourt Mall", value: 2 },
-    //{name: "Hawkins Labratory",  value: 3 }
+    {name: "Hawkins Laboratory",  value: 3 }
   ];
   readonly quips = [
     "Nancy & Steve are stuck in the Upside Down, there are XXX requests in front of you.",
@@ -65,12 +65,10 @@ export class AppComponent implements OnInit {
   }
 
   onFileDropped(file: any) {
-    console.log('onFileDropped', file[0]);
     this.uploadImage(file[0]);
 
   }
   fileBrowseHandler(evt: any) {
-    console.log('fileBrowseHandler', evt.target.files[0]);
     this.uploadImage(evt.target.files[0]);
   }
   onProcessClick() {
@@ -149,7 +147,6 @@ export class AppComponent implements OnInit {
             src: base64 as string
           };
           this.srcLoading = false;
-          console.log(this.srcImage);
         }
         catch (e) {
           alert('There was an error uploading your image');
@@ -208,7 +205,6 @@ export class AppComponent implements OnInit {
       // Encode the file using the FileReader API
       const reader = new FileReader();
       reader.onloadend = () => {
-        console.log(reader.result);
         resolve(reader.result as string);
       };
       reader.onerror = (e) => {

@@ -43,7 +43,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.get('/api/image/:imageName', async (req, res) => {
   let itemIdx = -1;
-  for (let i = queue.length - 1; i > 0 && itemIdx == -1; i--) {
+  for (let i = queue.length - 1; i >= 0 && itemIdx == -1; i--) {
     if (queue[i].imageName == req.params.imageName) {
       itemIdx = i;
     }
@@ -195,10 +195,7 @@ async function readImageAndConvertToBase64(imagepath) {
 async function generatePromptForImage(image_url, additional_info, prompt_type) {
   if (!image_url) {
     throw new Error('image_url is required');
-  }
-
-  //console.log('prompt_type is: ', prompt_type);
-
+  }  
   // source of the prompt tips: https://community.openai.com/t/dalle3-prompt-tips-and-tricks-thread/498040
 
   /*`Some basic DALLE-3 Prompt Tips:
