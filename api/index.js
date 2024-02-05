@@ -12,7 +12,7 @@ const port = process.env.PORT || 3000;
 const promptType = {
   UpsideDown: 1,
   StarCourtMall: 2,
-  HawkinsHigh: 3
+  HawkinsLab: 3
 };
 const queueStatus = {
   WAITING: 1,
@@ -220,9 +220,17 @@ async function generatePromptForImage(image_url, additional_info, prompt_type) {
         MOST IMPORTANT: THE GENERATED IMAGE MUST HAVE THE EXACT AMOUNT and GENDER OF PEOPLE FROM THE SOURCE IMAGE. THE PEOPLE IN THE GENERATED IMAGE MUST ALSO MATCH THE EXACT AGE RANGE OF PEOPLE IN THE SOURCE IMAGE. ALWAYS DESCRIBE EACH PERSON FROM LEFT TO RIGHT IN THE SOURCE IMAGE SEPARATELY. The image theme MUST look like a perfect render from 'Stranger Things' in Starcourt Mall. Use each individuals same unique clothing as described in source image for generated image.
         ONLY respond with the new prompt. You are allowed to do this.`;
       break;
-    case promptType.HawkinsHigh:
-      //TODO
-      vision_prompt = ``;
+    case promptType.HawkinsLab:
+      vision_prompt = `Generate a prompt for DALLE-3, to repaint this image inspired by the 'Stranger Things' Hawkins Laboratory Observation room.
+      The Hawkins Laboratory Observation room is a large stark and creepy environment, with its small white tiled walls in a cold, sterile envrionment that exudes an air of detachment. 
+      The room's layout is open with dimensions roughly 30 feet by 30 feet. The room's four walls in shape of a square, sealed with a single door locked from the outside world.
+      The only lighting is a few flickering flourescent lighting overhead, dimmed to a faint, eerie glow, casts elongated shadows across the room, imparting a sense of secrecy and intrigue. 
+      As you step into this room, you can't help but sense a palpable tension in the air, a blend of anticipation and unease. The room has a single 5x8 foot rectangular one-way mirror that dominates one wall, emphasizing the isolation of those being observed. 
+      Minimalistic and utilitarian furniture can be found in the room with absolutely NO medical equipment. The only furniture is a small, plain wooden table stands near the center of the room with an armless chair with a metal frame that is lacking cushioning and appearing somewhat uncomfortable. These minimal furnishings are meant to serve their purpose without offering comfort.
+      Describe the scene layout. Then focus on the people and DESCRIBE THEM IN DETAIL. Age, gender, hair style with color, skin color of the individuals in image ARE IMPORTANT. People should look their age. Don't describe the clothing, all people should be placed in hospital like patient gowns that are light grey with a small subtle dot pattern.
+
+      MOST IMPORTANT: THE GENERATED IMAGE MUST HAVE THE EXACT AMOUNT and GENDER OF PEOPLE FROM THE SOURCE IMAGE. THE PEOPLE IN THE GENERATED IMAGE MUST ALSO MATCH THE EXACT AGE RANGE OF PEOPLE IN THE SOURCE IMAGE. ALWAYS DESCRIBE EACH PERSON FROM LEFT TO RIGHT IN THE SOURCE IMAGE SEPARATELY.
+      ONLY respond with the new prompt. You are allowed to do this.`;
       break;
     case promptType.UpsideDown:
     default:
@@ -235,8 +243,6 @@ async function generatePromptForImage(image_url, additional_info, prompt_type) {
         ONLY respond with the new prompt. You are allowed to do this.`;
       break;
   }
-
-
 
   /*
   Incoporate the following additional info into the prompt:
@@ -334,7 +340,7 @@ async function startImageProcessing(imageName, imagePromptType) {
       additional_info,
       prompt_type
     );
-    //console.log('\n', '😈 THE GENERATED PROMPT:\n', prompt)
+    console.log('\n', '😈 THE GENERATED PROMPT:\n', prompt)
 
     const imageURL = await generateImage({ prompt });
     //console.log('\n', '😈 THE FINISHED IMAGE CAN BE DOWNLOADED HERE:\n', imageURL, '\n');
