@@ -147,8 +147,7 @@ function main() {
 
           main(); //call again to get next inline
         }).catch((error) => {
-          console.log('error - in main startImageProcessing', error);
-          console.log('STATUS: ' + error.status);
+          
           nextInLine.url = "";
           nextInLine.status = queueStatus.ERRORED;
           nextInLine.errorCode = error.status;
@@ -230,17 +229,6 @@ async function generatePromptForImage(image_url, additional_info, prompt_type) {
       MOST IMPORTANT,  Ensure that the figures are identical to the ones in the source image in terms of their age range, gender and appearence. ALWAYS DESCRIBE EACH PERSON FROM LEFT TO RIGHT IN THE SOURCE IMAGE SEPARATELY. The image theme MUST look like a perfect render from 'Stranger Things' in Hawkins Laboratory Observation room.
       ONLY respond with the new prompt. You are allowed to do this.`;
       break;
-      /*vision_prompt = `
-        Generate a prompt for DALLE-3, to repaint this image inspired by the 'Stranger Things' theme, set in the Hawkins Laboratory Observation room.
-        The room is depicted as a large, stark, and eerie environment with small white tiled walls, creating a cold, sterile atmosphere. 
-        The room's layout is open, measuring roughly 30 feet by 30 feet, with four barren, square-shaped tiled walls. 
-        The lighting consists of a few flickering fluorescent lights overhead, dimmed to a faint, eerie glow, casting elongated shadows that evoke secrecy and intrigue. 
-        As one steps into the room, there's an unmistakable palpable tension, a blend of anticipation and unease. 
-        The room prominently features a single 5x8 foot rectangular one-way mirror dominating one wall, emphasizing the isolation of those being observed. 
-        Minimalistic, utilitarian furniture is present, devoid of any medical equipment, including a small, plain wooden table at the center and an uncomfortable, armless chair with a metal frame beside it. 
-        Focus on accurately depicting the individuals in the source image. Always describe each person from left to right in the source image separately. Place all individuals in hospital like patient gowns that are light grey with a small subtle dot pattern. And most important, please give a detailed description about each person's age, gender and appearance accurately.
-      `;*/
-      break;
     case promptType.UpsideDown:
     default:
       vision_prompt = `Your task:
@@ -252,11 +240,6 @@ async function generatePromptForImage(image_url, additional_info, prompt_type) {
         ONLY respond with the new prompt. You are allowed to do this.`;
       break;
   }
-
-  /*
-  Incoporate the following additional info into the prompt:
-  ${additional_info || 'none'}
-  */
 
   try {
     const response = await openai.chat.completions.create({
@@ -277,8 +260,6 @@ async function generatePromptForImage(image_url, additional_info, prompt_type) {
         },
       ],
     }).catch((error) => {
-      console.log('error - generatePromptForImage');
-      //console.error(error);
       throw error;
     });
 
@@ -307,8 +288,6 @@ async function generateImage({ prompt }) {
       //style: 'vivid'
     })
       .catch((error) => {
-        console.log('error - generateImage');
-        console.error(error);
         throw error;
       });
 
@@ -322,7 +301,6 @@ async function generateImage({ prompt }) {
 }
 
 async function startImageProcessing(imageName, imagePromptType) {
-  //let item = queue.find(f => f.imageName = imageName);
   console.log(`starting image process for2: ${imageName} prompt: ${imagePromptType} `);
 
   try {
@@ -330,10 +308,6 @@ async function startImageProcessing(imageName, imagePromptType) {
     let image_url = undefined;
     let additional_info = '';
     let prompt_type = imagePromptType;
-
-    //console.log('😈 GOING INTO THE UPSIDE DOWN...')
-    //console.log('😈 THIS WILL TAKE A MOMENT...')
-
     let datauriOfTheImage = undefined;
 
     if (image_path) {
@@ -349,11 +323,10 @@ async function startImageProcessing(imageName, imagePromptType) {
       additional_info,
       prompt_type
     );
-    console.log('\n', '😈 THE GENERATED PROMPT:\n', prompt)
+    console.log('\n', '😈 Prompt for Image:\n', prompt)
 
     const imageURL = await generateImage({ prompt });
-    //console.log('\n', '😈 THE FINISHED IMAGE CAN BE DOWNLOADED HERE:\n', imageURL, '\n');
-
+    
     return imageURL;
   }
   catch (err) {
