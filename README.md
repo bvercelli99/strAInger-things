@@ -70,16 +70,16 @@ ng serve
 
 ## Examples
 ### The Upside Down
-![A man in the Upside Down](./examples/thisIsFine_upsidedown.png)
-![Two people in a pumpkin patch Upside Down](./examples/pumpkin_upsidedown.png)
-![Kevin McCallister in the Upside Down](./examples/kevinmccallister_upsidedown.png)
-![Two gentlemen in the  Upside Down](./examples/gentlemen_upsidedown.png)
-![A young person in the livingroom](./examples/img-WKItt7AMURHG8PZannjWrB6X.png)
+![A man in the Upside Down](./api/examples/thisIsFine_upsidedown.png)
+![Two people in a pumpkin patch Upside Down](./api/examples/pumpkin_upsidedown.png)
+![Kevin McCallister in the Upside Down](./api/examples/kevinmccallister_upsidedown.png)
+![Two gentlemen in the  Upside Down](./api/examples/gentlemen_upsidedown.png)
+![A young person in the livingroom](./api/examples/img-WKItt7AMURHG8PZannjWrB6X.png)
 ### Starcourt Mall
-![A man wearing Apple Vision in Starcourt Mall](./examples/starcourt_applevision.png)
-![A couple eating ice cream in Starcourt Mall](./examples/Starcourt_icecream.png)
-![A couple posing in Starcourt Mall foodcourt](./examples/starcourt_applevision.png)
-![A man enjoying a drink in Starcourt Mall foodcourt](./examples/Starcourt_drink.png)
+![A man wearing Apple Vision in Starcourt Mall](./api/examples/starcourt_applevision.png)
+![A couple eating ice cream in Starcourt Mall](./api/examples/Starcourt_icecream.png)
+![A couple posing in Starcourt Mall foodcourt](./api/examples/starcourt_applevision.png)
+![A man enjoying a drink in Starcourt Mall foodcourt](./api/examples/Starcourt_drink.png)
 ### Hawkins Lab
-![Two men sitting down at a table at the Hawkins Lab room](./examples/HawkinsLab1.png)
-![A woman with her back to the camera at the Hawkins Lab room](./examples/hawkinslab2.png)
+![Two men sitting down at a table at the Hawkins Lab room](./api/examples/HawkinsLab1.png)
+![A woman with her back to the camera at the Hawkins Lab room](./api/examples/hawkinslab2.png)
