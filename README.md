@@ -74,7 +74,6 @@ ng serve
 ![Two people in a pumpkin patch Upside Down](./api/examples/pumpkin_upsidedown.png)
 ![Kevin McCallister in the Upside Down](./api/examples/kevinmccallister_upsidedown.png)
 ![Two gentlemen in the  Upside Down](./api/examples/gentlemen_upsidedown.png)
-![A young person in the livingroom](./api/examples/img-WKItt7AMURHG8PZannjWrB6X.png)
 ### Starcourt Mall
 ![A man wearing Apple Vision in Starcourt Mall](./api/examples/starcourt_applevision.png)
 ![A couple eating ice cream in Starcourt Mall](./api/examples/Starcourt_icecream.png)
