@@ -77,7 +77,7 @@ ng serve
 ### Starcourt Mall
 ![A man wearing Apple Vision in Starcourt Mall](./api/examples/starcourt_applevision.png)
 ![A couple eating ice cream in Starcourt Mall](./api/examples/Starcourt_icecream.png)
-![A couple posing in Starcourt Mall foodcourt](./api/examples/starcourt_applevision.png)
+![A couple posing in Starcourt Mall foodcourt](./api/examples/starcourt2.png)
 ![A man enjoying a drink in Starcourt Mall foodcourt](./api/examples/Starcourt_drink.png)
 ### Hawkins Lab
 ![Two men sitting down at a table at the Hawkins Lab room](./api/examples/HawkinsLab1.png)
