@@ -12,7 +12,7 @@ The frontend is built with Angular 17.
 
 **This is inpspired by [@jh3yy's](https://twitter.com/jh3yy) tweet: <https://twitter.com/jh3yy/status/1730596577067122956>.**
 
-And some great ideas from: [Thomas Rosen's Lego Vision](https://github.com/thomasrosen/lego_vision>)
+And some great ideas from: [Thomas Rosen's Lego Vision](https://github.com/thomasrosen/lego_vision)
 
 ## Some Tips
 Some tips:
